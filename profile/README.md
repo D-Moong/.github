@@ -2,7 +2,7 @@
 
 > 한동대학교 공식 글로컬 홈페이지
 
-**공식 홈페이지**: [https://glocal.handong.edu](https://glocal.handong.edu)
+**공식 서비스 도메인**: [https://glocal.handong.edu](https://glocal.handong.edu)
 
 ## 📝 개요
 
@@ -207,6 +207,11 @@ git push origin release
     - **Dev**: ALB 기반 퍼블릭 접근 구조, 프론트/백엔드 테스트 서버는 프라이빗 서브넷에 위치하며 Bastion 서버를 통해 접근
     - **Prod**: Elastic IP를 활용한 고정 IP 기반 배포, 프론트엔드 서버는 퍼블릭 서브넷에 위치하여 외부 접근 허용, 백엔드 서버는 프라이빗 서브넷에 위치해 내부 통신만 가능
     - Bastion 서버는 각각의 퍼블릭 서브넷에 구성되어, Dev/Prod의 모든 프라이빗 리소스에 보안 터널링 지원
+    - **SSL 인증서 적용 및 HTTPS 구성**:
+        - 학교에서 발급한 인증서(`.crt`, `.key`, `ca_bundle`)를 EC2 서버에 직접 등록하고, Nginx에 수동 적용하여 HTTPS 제공
+        - Nginx 설정에서 `ssl_certificate`, `ssl_certificate_key`, `ssl_trusted_certificate` 등을 직접 구성
+        - CSP 위반, 400 에러, 인증서 유효성 문제 등 발생 이슈들을 디버깅하여 해결함
+        - 고정 IP 기반 배포 환경에서의 SSL 적용 경험 보유
 
 #### DevOps, CI/CD
 
@@ -219,6 +224,7 @@ git push origin release
     - `.env.production`은 GitHub Secrets에서 복호화 후 이미지 빌드시 반영
     - `docker system prune`으로 배포 시 캐시 자동 정리
     - Nginx 설정으로 보안 헤더 및 백엔드와 내부 통신 처리
+    - HTTPS 적용 후 CSP 정책 및 cross-origin 이슈 해결
     
   - **Backend**:
     - EC2 서버에 `application-secret.properties` 파일 동적 생성 및 마운트
@@ -228,3 +234,4 @@ git push origin release
   - `OWASP ZAP` 취약점 점검 자동화
   - 고정 IP 기반 취약점 보고서 생성 및 관리자 제출 완료
   - CSP, X-Frame-Options, Referrer-Policy 등 Nginx 보안 헤더 설정 완료
+  - **HTTPS 및 인증서 기반 보안 통신 구성**을 통해 사용자 신뢰성과 운영 안정성 확보
