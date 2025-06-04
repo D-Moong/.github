@@ -1,6 +1,8 @@
 # HGU Glocal Website
 
-> 한동대학교 공식 글로컬 홈페이지 &emsp; <a href="glocal.handong.edu">🔗 링크</a>
+> 한동대학교 공식 글로컬 홈페이지
+
+**공식 홈페이지**: [https://glocal.handong.edu](https://glocal.handong.edu)
 
 ## 📝 개요
 
