@@ -210,8 +210,8 @@ git push origin release
     - **SSL 인증서 적용 및 HTTPS 구성**:
         - 학교에서 발급한 인증서(`.crt`, `.key`, `ca_bundle`)를 EC2 서버에 직접 등록하고, Nginx에 수동 적용하여 HTTPS 제공
         - Nginx 설정에서 `ssl_certificate`, `ssl_certificate_key`, `ssl_trusted_certificate` 등을 직접 구성
-        - CSP 위반, 400 에러, 인증서 유효성 문제 등 발생 이슈들을 디버깅하여 해결함
-        - 고정 IP 기반 배포 환경에서의 SSL 적용 경험 보유
+        - CSP 위반, 400 에러, 인증서 유효성 문제 등 발생 이슈들을 디버깅하여 해결
+        - 고정 IP 기반 배포 환경에서의 SSL 적용
 
 #### DevOps, CI/CD
 
